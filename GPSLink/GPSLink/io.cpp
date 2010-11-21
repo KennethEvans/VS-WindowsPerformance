@@ -2367,8 +2367,14 @@ void writeGPXFile(TCHAR *szFileName)
 						ansiTimeString[TIME_CHARS_A_GPX-1]='\0';
 					}
 				} else {
+					// If the time is GarminTime0 then we don't want to write the time element
+					// It will cause validators to fail if we do
+#if 0
 					strncpy(ansiTimeString,"GarminTime0",TIME_CHARS_A_GPX);
 					ansiTimeString[TIME_CHARS_A_GPX-1]='\0';
+#else
+					ansiTimeString[0]='\0';
+#endif
 				}
 				latitude=pBlock1->getLatitude();
 				longitude=pBlock1->getLongitude();
@@ -2380,7 +2386,10 @@ void writeGPXFile(TCHAR *szFileName)
 				}
 				fprintf(fp,"  <trkpt lat=\"%.6f\" lon=\"%.6f\">\n",latitude,longitude);
 				fprintf(fp,"    <ele>%.6f</ele>\n",height);
-				fprintf(fp,"    <time>%s</time>\n",ansiTimeString);
+				if(ansiTimeString[0] != '\0') {
+					// Don't print the time element unless the time is valid
+					fprintf(fp,"    <time>%s</time>\n",ansiTimeString);
+				}
 				fprintf(fp,"  </trkpt>\n");
 				status=1;
 				++iter1;

@@ -765,7 +765,7 @@ void refreshLV(HWND hLV)
 	if(hLV == hWptLV) {
 		createLV=wptCreateLV;
 	} else if(hLV == hRteLV) {
-		createLV=wptCreateLV;
+		createLV=rteCreateLV;
 	} else if(hLV == hTrkLV) {
 		createLV=trkCreateLV;
 	} else {
