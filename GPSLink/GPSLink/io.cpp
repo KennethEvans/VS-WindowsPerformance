@@ -2353,6 +2353,7 @@ void writeGPXFile(TCHAR *szFileName)
 
 				// We want the GPX time to be GMT time, which is what is in the CTrackpoint
 				gTime=((CTrackpoint *)pBlock1)->getGTime();
+				int valid=1;
 				if(gTime >= 0) {
 					TCHAR timeString[TIME_CHARS_U_GPX];
 					printGarminTime(timeString,gTime,Format_GPX);
@@ -2373,7 +2374,7 @@ void writeGPXFile(TCHAR *szFileName)
 					strncpy(ansiTimeString,"GarminTime0",TIME_CHARS_A_GPX);
 					ansiTimeString[TIME_CHARS_A_GPX-1]='\0';
 #else
-					ansiTimeString[0]='\0';
+					valid=0;
 #endif
 				}
 				latitude=pBlock1->getLatitude();
@@ -2386,7 +2387,7 @@ void writeGPXFile(TCHAR *szFileName)
 				}
 				fprintf(fp,"  <trkpt lat=\"%.6f\" lon=\"%.6f\">\n",latitude,longitude);
 				fprintf(fp,"    <ele>%.6f</ele>\n",height);
-				if(ansiTimeString[0] != '\0') {
+				if(valid) {
 					// Don't print the time element unless the time is valid
 					fprintf(fp,"    <time>%s</time>\n",ansiTimeString);
 				}
