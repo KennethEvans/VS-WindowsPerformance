@@ -4,7 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-using TerraView.com.terraserver_usa;
+using TerraView.com.msrmaps;
 using KEUtilities;
 
 namespace TerraView

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 using System.Drawing.Drawing2D;
-using TerraView.com.terraserver_usa;
+using TerraView.com.msrmaps;
 using KEUtilities;
 
 namespace TerraView
@@ -328,7 +328,7 @@ namespace TerraView
             set { mainForm.MapType=value; typeCB.Text=mainForm.MapType.ToString(); }
         }
 
-        private new TerraView.com.terraserver_usa.Scale Scale {
+        private new TerraView.com.msrmaps.Scale Scale {
             get { return mainForm.Scale; }
             set { mainForm.Scale=value; scaleCB.Text=mainForm.Scale.ToString(); }
         }

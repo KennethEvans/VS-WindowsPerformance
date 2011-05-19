@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TerraView.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TerraView_com_msrmaps_TerraService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://msrmaps.com/TerraService2.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

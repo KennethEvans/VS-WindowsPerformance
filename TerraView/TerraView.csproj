@@ -137,14 +137,18 @@
     <Compile Include="ProgressDlg.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Utils.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web References\com.terraserver-usa\Reference.cs">
-      <DependentUpon>Reference.map</DependentUpon>
-      <SubType>code</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Web References\com.msrmaps\Reference.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AboutDlg.resx">
       <DependentUpon>AboutDlg.cs</DependentUpon>
@@ -176,36 +180,48 @@
     </EmbeddedResource>
     <Content Include="help.txt" />
     <Content Include="TsNavInOut.gif" />
-    <None Include="Web References\com.terraserver-usa\AreaBoundingBox.datasource">
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\com.msrmaps\AreaBoundingBox.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\com.terraserver-usa\LonLatPt.datasource">
+    <None Include="Web References\com.msrmaps\LonLatPt.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\com.terraserver-usa\PlaceFacts.datasource">
+    <None Include="Web References\com.msrmaps\PlaceFacts.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\com.terraserver-usa\Reference.map">
+    <None Include="Web References\com.msrmaps\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\com.terraserver-usa\terraservice2.disco" />
-    <None Include="Web References\com.terraserver-usa\terraservice2.wsdl" />
-    <None Include="Web References\com.terraserver-usa\ThemeBoundingBox.datasource">
+    <None Include="Web References\com.msrmaps\TerraService2.disco" />
+    <None Include="Web References\com.msrmaps\TerraService2.wsdl" />
+    <None Include="Web References\com.msrmaps\ThemeBoundingBox.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\com.terraserver-usa\ThemeInfo.datasource">
+    <None Include="Web References\com.msrmaps\ThemeInfo.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\com.terraserver-usa\TileMeta.datasource">
+    <None Include="Web References\com.msrmaps\TileMeta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\com.terraserver-usa\UtmPt.datasource">
+    <None Include="Web References\com.msrmaps\UtmPt.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <WebReferenceUrl Include="http://terraserver-usa.com/terraservice2.asmx">
-      <RelPath>Web References\com.terraserver-usa\</RelPath>
-      <UrlBehavior>Static</UrlBehavior>
+    <WebReferenceUrl Include="http://msrmaps.com/TerraService2.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.msrmaps\</RelPath>
+      <UpdateFromURL>http://msrmaps.com/TerraService2.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>TerraView_com_msrmaps_TerraService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferences Include="Web References\" />
   </ItemGroup>

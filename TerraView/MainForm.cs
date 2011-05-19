@@ -10,7 +10,7 @@ using System.Data;
 
 using System.Drawing.Imaging;
 using System.IO;
-using TerraView.com.terraserver_usa;
+using TerraView.com.msrmaps;
 using KEUtilities;
 
 namespace TerraView {
@@ -397,7 +397,7 @@ namespace TerraView {
             get { return scaleDefault; }
         }
 
-        public new TerraView.com.terraserver_usa.Scale Scale {
+        public new TerraView.com.msrmaps.Scale Scale {
             get { return scale; }
             set { scale=value; }
         }
