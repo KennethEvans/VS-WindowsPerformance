@@ -1,4 +1,5 @@
 #undef DEBUG_PIXELSIZE
+#undef USE_MAPPOINT
 #undef QUICK_START
 
 using System;
@@ -12,6 +13,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using TerraView.com.msrmaps;
 using KEUtilities;
+#if USE_MAPPOINT
+using MapPointUtilities;
+#endif
 
 namespace TerraView {
 
@@ -34,6 +38,9 @@ namespace TerraView {
         private ProgressDlg pDlg=new ProgressDlg();
         private String title="Terra View";
         private TerraService ts=null;
+#if USE_MAPPOINT
+        private MapPointClient mpc=null;
+#endif
         private Graphics graphics=null;
 
     // Used by controlPanel
@@ -62,10 +69,11 @@ namespace TerraView {
         private ImageFormat imageFormat=ImageFormat.Bmp;
         private double lon0=0.0,lonX=0.0,lonY=0.0,lonXY=0.0;
         private double lat0=0.0,latX=0.0,latY=0.0,latXY=0.0;
+#if USE_MAPPOINT
+        private bool gettingMapPointMap=false;
+        private const double PixMapPoint2PixTerra=0.3857;
+#endif
 
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.Container components = null;
         private System.Windows.Forms.MenuItem fileMenu;
         private System.Windows.Forms.MenuItem fileMenuOpen;
@@ -130,6 +138,15 @@ namespace TerraView {
         /// </summary>
         protected override void Dispose( bool disposing ) {
             if( disposing ) {
+#if USE_MAPPOINT
+                if(mpc != null) {
+                    try {
+                        mpc.Dispose();
+                        mpc=null;
+                    } catch {
+                    }
+                }
+#endif
                 if (components != null) {
                     components.Dispose();
                 }
@@ -172,20 +189,20 @@ namespace TerraView {
             // mainMenu
             // 
             this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                     this.fileMenu,
-                                                                                     this.optionsMenu,
-                                                                                     this.helpMenu});
+            this.fileMenu,
+            this.optionsMenu,
+            this.helpMenu});
             // 
             // fileMenu
             // 
             this.fileMenu.Index = 0;
             this.fileMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                     this.fileMenuOpen,
-                                                                                     this.fileMenuSave,
-                                                                                     this.fileMenuSaveGpsl,
-                                                                                     this.fileMenuSaveAs,
-                                                                                     this.fileMenuSaveAsGpsl,
-                                                                                     this.fileMenuExit});
+            this.fileMenuOpen,
+            this.fileMenuSave,
+            this.fileMenuSaveGpsl,
+            this.fileMenuSaveAs,
+            this.fileMenuSaveAsGpsl,
+            this.fileMenuExit});
             this.fileMenu.Text = "File";
             // 
             // fileMenuOpen
@@ -228,11 +245,11 @@ namespace TerraView {
             // 
             this.optionsMenu.Index = 1;
             this.optionsMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                        this.optionsFitToImage,
-                                                                                        this.optionsSearch,
-                                                                                        this.optionsRefresh,
-                                                                                        this.optionsGetMapPointMap,
-                                                                                        this.optionsControlPanel});
+            this.optionsFitToImage,
+            this.optionsSearch,
+            this.optionsRefresh,
+            this.optionsGetMapPointMap,
+            this.optionsControlPanel});
             this.optionsMenu.Text = "Options";
             // 
             // optionsFitToImage
@@ -269,8 +286,8 @@ namespace TerraView {
             // 
             this.helpMenu.Index = 2;
             this.helpMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                     this.helpMenuOverview,
-                                                                                     this.helpMenuAbout});
+            this.helpMenuOverview,
+            this.helpMenuAbout});
             this.helpMenu.Text = "Help";
             // 
             // helpMenuOverview
@@ -290,7 +307,7 @@ namespace TerraView {
             this.statusBar.Location = new System.Drawing.Point(0, 315);
             this.statusBar.Name = "statusBar";
             this.statusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
-                                                                                         this.statusBarPanel1});
+            this.statusBarPanel1});
             this.statusBar.ShowPanels = true;
             this.statusBar.Size = new System.Drawing.Size(376, 22);
             this.statusBar.TabIndex = 1;
@@ -459,6 +476,14 @@ namespace TerraView {
                 }
                 controlPanel.Reset();
                 controlPanel.Show();
+#if USE_MAPPOINT
+            } else if(sender == optionsGetMapPointMap) {
+                if(mpc == null || !mpc.Started) {
+                    ErrMsg.Show("MapPoint must be started from TerraView first");
+                    return;
+                }
+                GetMapPointMap();
+#endif
             } else if(sender == helpMenuOverview) {
                 // HelpMenuOverview
                 OverviewDlg dlg=new OverviewDlg();
@@ -633,6 +658,10 @@ namespace TerraView {
             // Get the image
             try {
                 if(mapType == MapType.MapPoint) {
+#if USE_MAPPOINT
+                    Cursor.Current=Cursors.WaitCursor;
+                    GetMapPointImage();
+#endif
                 } else {
                     GetTerraImage();
                 }
@@ -676,6 +705,115 @@ namespace TerraView {
                 Cursor.Current=Cursors.Default;
             }
         }
+#if USE_MAPPOINT
+        private void GetMapPointImage() {
+            if(mpc == null) {
+                try {
+                    mpc=new MapPointClient();
+                } catch(Exception e) {
+                    if(listExceptions) {
+                        ExcMsg.ShowDlg("Cannot start MapPointClient",e);
+                    } else {
+                        ErrMsg.Show("Cannot start MapPointClient");
+                    }
+                    return;
+                }
+            }
+            if(!mpc.Started) {
+                try {
+                    mpc.Start();
+                } catch(Exception e) {
+                    if(listExceptions) {
+                        ExcMsg.ShowDlg("Cannot start MapPoint",e);
+                    } else {
+                        ErrMsg.Show("Cannot start MapPoint");
+                    }
+                    return;
+                }
+            }
+            try {
+                mpc.Width=imageWidth;
+                mpc.Height=imageHeight;
+            } catch(Exception e) {
+                if(listExceptions) {
+                    ExcMsg.Show("Error setting MapPoint size",e);
+                } else {
+                    ErrMsg.Show("Error setting MapPoint size");
+                }
+                return;
+            }
+            try {
+                if(!gettingMapPointMap) {
+                    double altitude=GetAltFromScale(scale);
+                    MapPoint.Location loc=mpc.Map.GetLocation(centerLat,centerLon,altitude);
+                    mpc.Map.Location=loc;
+                }
+            } catch(Exception e) {
+                if(listExceptions) {
+                    ExcMsg.Show("Error setting MapPoint map",e);
+                } else {
+                    ErrMsg.Show("Error setting MapPoint map");
+                }
+                return;
+            }
+            try {
+                mpc.Map.CopyMap();
+                IDataObject ido=Clipboard.GetDataObject();
+                if(ido.GetDataPresent(DataFormats.Bitmap)) {
+                    Image clipImage=(Bitmap)ido.GetData(DataFormats.Bitmap);
+                    graphics.DrawImage(clipImage,0,0,clipImage.Width,clipImage.Height);
+                } else {
+                    ErrMsg.Show("Error getting MapPoint image");
+                    return;
+                }
+            } catch(Exception e) {
+                if(listExceptions) {
+                    ExcMsg.Show("Error getting MapPoint map",e);
+                } else {
+                    ErrMsg.Show("Error getting MapPoint map");
+                }
+                return;
+            }
+            try {
+#if DEBUG_PIXELSIZE
+                double pixelSize=mpc.Map.PixelSize*621.37;
+                Text=title + ": PixelSize=" + pixelSize.ToString("f6") +
+                    ", Altitude=" + mpc.Map.Altitude +
+                    ", scale2Alt=" + scale2Alt[(int)scale] +
+                    ", scale=" + (int)scale;
+#else
+                Text=title + ": " + mpc.Map.Location.PlaceCategory.Name;
+#endif
+                } catch {
+                Text=title + ": MapPoint Map";
+            }
+#if true
+            int x0=mpc.Map.Left;
+            int y0=mpc.Map.Top;
+            MapPoint.Location nwLoc=mpc.Map.XYToLocation(0,0);
+            MapPoint.Location neLoc=mpc.Map.XYToLocation(imageWidth-1,0);
+            MapPoint.Location seLoc=mpc.Map.XYToLocation(imageWidth-1,imageHeight-1);
+            MapPoint.Location swLoc=mpc.Map.XYToLocation(0,imageHeight-1);
+            MapPointClient.LonLatPtD nwPt=mpc.GetLatLonFromLocation(nwLoc);
+            MapPointClient.LonLatPtD nePt=mpc.GetLatLonFromLocation(neLoc);
+            MapPointClient.LonLatPtD sePt=mpc.GetLatLonFromLocation(seLoc);
+            MapPointClient.LonLatPtD swPt=mpc.GetLatLonFromLocation(swLoc);
+            if(northWest == null) northWest=new LonLatPt();
+            if(northEast == null) northEast=new LonLatPt();
+            if(southEast == null) southEast=new LonLatPt();
+            if(southWest == null) southWest=new LonLatPt();
+            northWest.Lat=nwPt.Lat;
+            northWest.Lon=nwPt.Lon;
+            northEast.Lat=nePt.Lat;
+            northEast.Lon=nePt.Lon;
+            southEast.Lat=sePt.Lat;
+            southEast.Lon=sePt.Lon;
+            southWest.Lat=swPt.Lat;
+            southWest.Lon=swPt.Lon;
+            GetTranslation();
+#endif
+        }
+#endif
 
         private int MapTypeToTheme(MapType mapType) {
             if(mapType == MapType.Photo ||
@@ -827,6 +965,38 @@ namespace TerraView {
             return ret;
         }
 
+#if USE_MAPPOINT
+        private double GetAltFromScale(Scale scale) {
+            int intScale=(int)scale;
+            double retVal;
+            if(intScale <= 0) retVal=scale2Alt[0];
+            else if(intScale >= 24) retVal=scale2Alt[24];
+            else retVal=scale2Alt[intScale];
+            return retVal*PixMapPoint2PixTerra;
+        }
+        private void GetMapPointMap() {
+            try {
+                gettingMapPointMap=true;
+                imageWidth=mpc.Width;
+                imageHeight=mpc.Height;
+                MapPoint.Location loc=mpc.Map.Location;
+                MapPointClient.LonLatPtD pt=mpc.GetLatLonFromLocation(loc);
+                centerLat=pt.Lat;
+                centerLon=pt.Lon;
+                mapType=MapType.MapPoint;
+                Reset();
+            } catch(Exception e) {
+                if(listExceptions) {
+                    ExcMsg.Show("Error getting MapPoint map",e);
+                } else {
+                    ErrMsg.Show("Error getting MapPoint map");
+                }
+                return;
+            } finally {
+                gettingMapPointMap=false;
+            }
+        }
+#endif
         public bool CheckScale(bool showError, bool reset) {
             bool error=false;
 
