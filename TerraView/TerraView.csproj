@@ -111,13 +111,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <COMReference Include="MapPoint">
-      <Guid>{31851F80-AFE6-11D2-A3C9-00C04F72F340}</Guid>
-      <VersionMajor>8</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutDlg.cs">
@@ -134,9 +127,6 @@
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MapPointClient.cs">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="OverviewDlg.cs">
       <SubType>Form</SubType>
