@@ -6,6 +6,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6FD3B185-B95E-4591-86F2-5D8DA8B30EAF}"
 	ProjectSection(SolutionItems) = preProject
 		README.txt = README.txt
+		WindowsPerformanceReview.BootTime.csv = WindowsPerformanceReview.BootTime.csv
+		WindowsPerformanceReview.txt = WindowsPerformanceReview.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPerformanceViewer", "WindowsPerformanceViewer\WindowsPerformanceViewer.csproj", "{38EECC72-2237-46A5-A3A1-B97FB7ED6BCE}"
