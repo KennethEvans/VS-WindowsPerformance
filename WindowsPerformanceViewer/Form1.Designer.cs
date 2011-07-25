@@ -36,6 +36,12 @@ namespace WindowsPerformanceViewer {
         public Form1() {
             InitializeComponent();
             // Create the DataSource
+            DataTable table = getResultsTable();
+            if (table == null) {
+                MessageBox.Show("Unable to get data.  You may have to run as administrator.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             dataGridView1.DataSource = getResultsTable();
             dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             //dataGridView1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
