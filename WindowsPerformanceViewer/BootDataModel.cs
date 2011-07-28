@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics.Eventing.Reader;
 using System.Xml;
 using System.Xml.XPath;
@@ -60,7 +58,9 @@ namespace WindowsPerformanceViewer {
         new DataSetInfo("WinLogonStartTimeMS", "ms", DataType.STRING),
         new DataSetInfo("OtherLogonInitActivityDuration", "ms", DataType.STRING),
         new DataSetInfo("UserLogonWaitDuration", "ms", DataType.STRING),
-    };
+        };
+
+        public static readonly int N_DATA_SETS = BOOT_DATA_INFOS.Length;
 
         /// <summary>
         /// The boot data info as determined by parsing the logs.
@@ -179,28 +179,55 @@ namespace WindowsPerformanceViewer {
             }
             // Fill the double array, converting the data
             double doubleVal;
+            String name;
+            Boolean scaleToSec;
+            String firstValue;
             data = new double[count][];
             for (int j = 0; j < count; j++) {
                 data[j] = new double[nItems];
+                scaleToSec = false;
                 for (int i = 0; i < nItems; i++) {
+                    if (j == 0) {
+                        // Set the bootInfosData parameters based on the names
+                        // or first values
+                        name = bootDataInfos[i].Name;
+                        firstValue = stringData[0][i];
+                        if (firstValue.Equals("true") ||
+                                firstValue.Equals("false")) {
+                            // Set names with first value that is true or false
+                            // to be Boolean
+                            bootDataInfos[i].Units = "Boolean";
+                            bootDataInfos[i].Type = DataType.BOOLEAN;
+
+                        } else if (firstValue.EndsWith("Z")) {
+                            // Set names with first value that ends with Z to
+                            // be dates
+                            bootDataInfos[i].Units = "";
+                            bootDataInfos[i].Type = DataType.DATE;
+                        } else if (name.Contains("Time") || name.Contains("Duration")) {
+                            // Scale names of those that are left that contain
+                            // Duration or Time to sec
+                            scaleToSec = true;
+                            bootDataInfos[i].Units = "sec";
+                            bootDataInfos[i].Type = DataType.DOUBLE;
+                        } else {
+                            // Others are numbers
+                            bootDataInfos[i].Units = "";
+                            bootDataInfos[i].Type = DataType.DOUBLE;
+                        }
+                    }
                     if (stringData[j][i].Equals("true")) {
                         // Boolean true is 1
-                        bootDataInfos[i].Type = DataType.BOOLEAN;
                         doubleVal = 1;
                     } else if (stringData[j][i].Equals("false")) {
                         // Boolean false is 0
-                        bootDataInfos[i].Type = DataType.BOOLEAN;
                         doubleVal = 0;
                     } else if (stringData[j][i].EndsWith("Z")) {
                         // UTC string converts to OLE automation time
-                        bootDataInfos[i].Type = DataType.DATE;
                         DateTime dateTime =
                             Utils.utcToLocalDateTime(stringData[j][i]);
                         doubleVal = dateTime.ToOADate();
                     } else {
-                        bootDataInfos[i].Type = DataType.DOUBLE;
-                        // Assume all the remaining data is in ms
-                        // Otherwise this logic has to treat separate cases
                         try {
                             doubleVal = Convert.ToDouble(stringData[j][i]);
                         } catch (FormatException) {
@@ -208,7 +235,9 @@ namespace WindowsPerformanceViewer {
                         } catch (OverflowException) {
                             doubleVal = Double.NaN;
                         }
-                        doubleVal *= MS2SEC;
+                        if (scaleToSec) {
+                            doubleVal *= MS2SEC;
+                        }
                     }
                     data[j][i] = doubleVal;
                 }
@@ -216,7 +245,19 @@ namespace WindowsPerformanceViewer {
             return true;
         }
 
-
+        /// <summary>
+        /// Gets the index for a specified data name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The index for the name or -1 if not found.</returns>
+        public int getIndexFor(String name) {
+            for (int i = 0; i < N_DATA_SETS; i++) {
+                if (BOOT_DATA_INFOS[i].Name.Equals(name)) {
+                    return i;
+                }
+            }
+            return -1;
+        }
 
     }
 }

@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using WindowsPerformanceReview;
 using System.Windows.Forms.DataVisualization.Charting;
+
 namespace WindowsPerformanceViewer {
     partial class BootTimesPlotForm {
         public static readonly String xName = "Index";

@@ -1,7 +1,8 @@
-﻿using System.Data;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using System.Data;
 using System.Windows.Forms;
+
 namespace WindowsPerformanceViewer {
     partial class Form1 {
         /// <summary>

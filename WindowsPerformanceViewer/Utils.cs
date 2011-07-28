@@ -6,8 +6,14 @@ namespace WindowsPerformanceViewer {
     class Utils {
         public static readonly String LF = "\r\n";
 
+        public static void infoMsg(String msg) {
+            MessageBox.Show(msg, "Error", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
         public static void errMsg(String msg) {
-            MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(msg, "Error", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
         }
 
         public static void excMsg(String msg, Exception ex) {
