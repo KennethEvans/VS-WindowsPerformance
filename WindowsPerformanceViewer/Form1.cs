@@ -53,15 +53,6 @@ namespace WindowsPerformanceViewer {
         private void plotToolStripMenuItem_Click(object sender, EventArgs e) {
             Cursor oldCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            BootTimesPlotForm plotForm = new BootTimesPlotForm(this.BootTimes);
-            plotForm.StartPosition = FormStartPosition.CenterParent;
-            plotForm.Show();
-            Cursor.Current = oldCursor;
-        }
-
-        private void plotExtendedToolStripMenuItem_Click(object sender, EventArgs e) {
-            Cursor oldCursor = Cursor.Current;
-            Cursor.Current = Cursors.WaitCursor;
             PlotForm plotForm = new PlotForm();
             plotForm.StartPosition = FormStartPosition.CenterParent;
             plotForm.Show();
