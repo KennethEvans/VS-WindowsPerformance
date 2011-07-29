@@ -180,12 +180,10 @@ namespace WindowsPerformanceViewer {
             // Fill the double array, converting the data
             double doubleVal;
             String name;
-            Boolean scaleToSec;
             String firstValue;
             data = new double[count][];
             for (int j = 0; j < count; j++) {
                 data[j] = new double[nItems];
-                scaleToSec = false;
                 for (int i = 0; i < nItems; i++) {
                     if (j == 0) {
                         // Set the bootInfosData parameters based on the names
@@ -198,7 +196,6 @@ namespace WindowsPerformanceViewer {
                             // to be Boolean
                             bootDataInfos[i].Units = "Boolean";
                             bootDataInfos[i].Type = DataType.BOOLEAN;
-
                         } else if (firstValue.EndsWith("Z")) {
                             // Set names with first value that ends with Z to
                             // be dates
@@ -207,7 +204,6 @@ namespace WindowsPerformanceViewer {
                         } else if (name.Contains("Time") || name.Contains("Duration")) {
                             // Scale names of those that are left that contain
                             // Duration or Time to sec
-                            scaleToSec = true;
                             bootDataInfos[i].Units = "sec";
                             bootDataInfos[i].Type = DataType.DOUBLE;
                         } else {
@@ -235,7 +231,7 @@ namespace WindowsPerformanceViewer {
                         } catch (OverflowException) {
                             doubleVal = Double.NaN;
                         }
-                        if (scaleToSec) {
+                        if (bootDataInfos[i].Units.Equals("sec")) {
                             doubleVal *= MS2SEC;
                         }
                     }
