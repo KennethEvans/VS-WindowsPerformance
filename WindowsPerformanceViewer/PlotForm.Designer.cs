@@ -9,7 +9,12 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsPerformanceViewer {
     partial class PlotForm {
-        public static readonly String xName = "Index";
+        public static readonly String INDEX_NAME = "EventIndex";
+
+        /// <summary>
+        /// Roundoff value
+        /// </summary>
+        private static readonly double ROFF6 = .000001;
 
         /// <summary>
         /// The default names to plot. 0 corresponds to x.
@@ -49,9 +54,10 @@ namespace WindowsPerformanceViewer {
             InitializeComponent();
 
             // Populate the list box
-            listNames = new String[BootDataModel.N_DATA_SETS];
+            listNames = new String[BootDataModel.N_DATA_SETS + 1];
+            listNames[0] = INDEX_NAME;
             for (int i = 0; i < BootDataModel.N_DATA_SETS; i++) {
-                listNames[i] = BootDataModel.BOOT_DATA_INFOS[i].Name;
+                listNames[i + 1] = BootDataModel.BOOT_DATA_INFOS[i].Name;
             }
             listBox1.DataSource = listNames;
 
@@ -74,7 +80,10 @@ namespace WindowsPerformanceViewer {
         }
 
         /// <summary>
-        /// Set the data in the chart.
+        /// Set the data in the chart.  Note: The chart data are in a small
+        /// DataTable with an added index column.  The model data represents
+        /// all the data and is much larger.  This method generates the data
+        /// for the specified plot values from the model.
         /// </summary>
         /// <param name="names">Array of names of plot.  The first element
         /// is for the x axis.  The others are for the series.</param>
@@ -89,9 +98,9 @@ namespace WindowsPerformanceViewer {
             // Set the series
             int index;
             int[] indices = new int[nCols];
-            DataType type = DataType.STRING;
+            DataType type = DataType.DOUBLE;
             for (int i = 0; i < nCols; i++) {
-                index = model.getIndexFor(names[i]);
+                index = getIndex(names[i]);
                 if (index < 0) {
                     Utils.errMsg("Name not found: " + names[i]);
                     break;
@@ -99,8 +108,8 @@ namespace WindowsPerformanceViewer {
                 indices[i] = index;
                 if (i == 0) {
                     // x axis
-                    // Get the type to be used for the series
-                    type = model.BootDataInfos[index].Type;
+                    // Get the type to be used for the x axis for the series
+                    type = getType(index);
                     // This is not a series
                     continue;
                 }
@@ -154,11 +163,11 @@ namespace WindowsPerformanceViewer {
                 DataRow dr;
                 for (int j = 0; j < count; j++) {
                     dr = dt.NewRow();
-                    // The StartTime is at index 0.
-                    dr[names[0]] = data[j][indices[0]];
+                    // The first column is the x axis
+                    dr[names[0]] = getDataPoint(j, indices[0]);
                     for (int i = 1; i < nCols; i++) {
                         index = indices[i];
-                        doubleVal = data[j][index];
+                        doubleVal = getDataPoint(j, index);
                         dr[names[i]] = doubleVal;
                     }
                     dt.Rows.Add(dr);
@@ -182,6 +191,47 @@ namespace WindowsPerformanceViewer {
             info += "Maximum=" + chart1.ChartAreas[0].AxisX.Maximum + Utils.LF;
             Utils.infoMsg(info);
 #endif
+        }
+
+        /// <summary>
+        /// Gets the index of a data set name in the DataTable taking into
+        /// account the index column added at the beginning.  Error handling
+        /// should be done by the caller.
+        /// </summary>
+        /// <param name="name">The data set name.</param>
+        /// <returns></returns>
+        private int getIndex(String name) {
+            if (name.Equals(INDEX_NAME)) {
+                return 0;
+            }
+            // Look for a model index
+            int modelIndex = model.getIndexFor(name);
+            if (modelIndex < 0) {
+                return modelIndex;
+            }
+            return modelIndex + 1;
+        }
+
+        /// <summary>
+        /// Gets the DataType of a data set name in the DataTable taking into
+        /// account the index column added at the beginning.  The caller must
+        /// pass a valid index.  The validity is not checked.
+        /// </summary>
+        /// <param name="index">The extended, not model, index.</param>
+        /// <returns></returns>
+        private DataType getType(int index) {
+            if (index == 0) {
+                return DataType.DOUBLE;
+            }
+            return model.BootDataInfos[index -1].Type;
+        }
+
+        private double getDataPoint(int j, int index) {
+            if (index == 0) {
+                // Add roundoff so plot axis will start at 0
+                return j + ROFF6;
+            }
+            return model.Data[j][index - 1];
         }
 
         /// <summary>
