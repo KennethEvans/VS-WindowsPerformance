@@ -1,6 +1,4 @@
-﻿#undef FALSE
-#define TRUE
-#define USE_TIME_FORMAT
+﻿#define USE_TIME_FORMAT
 
 using System;
 using System.Collections.Generic;
@@ -184,7 +182,7 @@ namespace WindowsPerformanceViewer {
                 chart1.DataBind();
             }
 
-#if FALSE
+#if false
             String info = "";
             info += "Interval=" + chart1.ChartAreas[0].AxisX.Interval + Utils.LF;
             info += "Minimum=" + chart1.ChartAreas[0].AxisX.Minimum + Utils.LF;

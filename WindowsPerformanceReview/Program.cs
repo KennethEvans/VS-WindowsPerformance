@@ -1,13 +1,6 @@
-﻿#undef FALSE
-#define TRUE
-
-using System;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Globalization;
-using System.IO;
-using System.Xml;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace WindowsPerformanceReview {
     class Program {
@@ -26,17 +19,17 @@ namespace WindowsPerformanceReview {
             swOut.WriteLine("WindowsPerformanceReview " + DateTime.Now);
             swOut.WriteLine();
 
-#if FALSE
+#if false
             // Read from the Application log
             swOut.WriteLine(DiagnosticsUtils.readLog("Application", 20));
 #endif
-#if FALSE
+#if false
             // Try to read an Applications and Services log.
             // Doesn't work unless one of the standard logs
             swOut.WriteLine(
                 DiagnosticsUtils.readLog("Microsoft-Windows-Diagnostics-Performance/Operational", 20));
 #endif
-#if FALSE
+#if false
             // Query an Applications and Services log
             //String queryString = "*[System/Level=2]"; // XPATH Query
             String queryString = "*"; // XPATH Query
@@ -44,7 +37,7 @@ namespace WindowsPerformanceReview {
             PathType pathType = PathType.LogName;
             swOut.WriteLine(DiagnosticsUtils.queryLogFileXml(queryString, pathType, eventLog));
 #endif
-#if TRUE
+#if true
             // Get the boot times
             swOut.WriteLine("Boot Times");
             List<String[]> bootTimes = DiagnosticsUtils.getBootTimes();
@@ -63,7 +56,7 @@ namespace WindowsPerformanceReview {
             }
             swOut.WriteLine();
 #endif
-#if TRUE
+#if true
             // Make a CSV file
             swOut.WriteLine("Making Boot Times CSV file " + BOOT_CSV_FILE);
             if (doBootCsv) {
@@ -76,7 +69,7 @@ namespace WindowsPerformanceReview {
             }
             swOut.WriteLine();
 #endif
-#if FALSE
+#if false
             // Test
             swOut.WriteLine(Test.test());
 #endif

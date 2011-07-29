@@ -64,6 +64,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="OverviewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OverviewDialog.Designer.cs">
+      <DependentUpon>OverviewDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlotForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverviewDialog.resx">
+      <DependentUpon>OverviewDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PlotForm.resx">
@@ -109,6 +119,9 @@
       <Project>{A3D42B99-CDF5-4B20-8E2F-9C801B3700BA}</Project>
       <Name>WindowsPerformanceReview</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Overview.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

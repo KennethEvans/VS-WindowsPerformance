@@ -63,5 +63,10 @@ namespace WindowsPerformanceViewer {
             AboutBox dlg = new AboutBox();
             dlg.ShowDialog();
         }
+
+        private void overviewToolStripMenuItem_Click(object sender, EventArgs e) {
+            OverviewDialog dlg = new OverviewDialog();
+            dlg.ShowDialog();
+        }
     }
 }
