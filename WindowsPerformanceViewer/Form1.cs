@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace WindowsPerformanceViewer {
     public partial class Form1 : Form {
@@ -66,6 +66,11 @@ namespace WindowsPerformanceViewer {
             plotForm.StartPosition = FormStartPosition.CenterParent;
             plotForm.Show();
             Cursor.Current = oldCursor;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            AboutBox dlg = new AboutBox();
+            dlg.ShowDialog();
         }
     }
 }

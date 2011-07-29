@@ -75,9 +75,11 @@ namespace WindowsPerformanceViewer {
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createCSVFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plotExtendedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.plotExtendedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -119,7 +121,8 @@ namespace WindowsPerformanceViewer {
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -153,6 +156,13 @@ namespace WindowsPerformanceViewer {
             this.plotToolStripMenuItem.Text = "Plot Boot Times...";
             this.plotToolStripMenuItem.Click += new System.EventHandler(this.plotToolStripMenuItem_Click);
             // 
+            // plotExtendedToolStripMenuItem
+            // 
+            this.plotExtendedToolStripMenuItem.Name = "plotExtendedToolStripMenuItem";
+            this.plotExtendedToolStripMenuItem.Size = new System.Drawing.Size(233, 32);
+            this.plotExtendedToolStripMenuItem.Text = "Plot Extended...";
+            this.plotExtendedToolStripMenuItem.Click += new System.EventHandler(this.plotExtendedToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -165,12 +175,20 @@ namespace WindowsPerformanceViewer {
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // plotExtendedToolStripMenuItem
+            // helpToolStripMenuItem
             // 
-            this.plotExtendedToolStripMenuItem.Name = "plotExtendedToolStripMenuItem";
-            this.plotExtendedToolStripMenuItem.Size = new System.Drawing.Size(233, 32);
-            this.plotExtendedToolStripMenuItem.Text = "Plot Extended...";
-            this.plotExtendedToolStripMenuItem.Click += new System.EventHandler(this.plotExtendedToolStripMenuItem_Click);
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 32);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 32);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -255,6 +273,8 @@ namespace WindowsPerformanceViewer {
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem plotToolStripMenuItem;
         private ToolStripMenuItem plotExtendedToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
