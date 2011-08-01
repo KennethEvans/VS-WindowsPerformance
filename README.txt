@@ -1,6 +1,6 @@
 Notes
 =====
-Can use the Event Viewr to view the logs.
+Can use the Event Viewer to view the logs.
   Applications and Services Logs
     Microsoft
        Windows
