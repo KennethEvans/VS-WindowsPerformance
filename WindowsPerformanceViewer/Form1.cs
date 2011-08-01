@@ -2,10 +2,13 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using System.Security.Principal;
 
 namespace WindowsPerformanceViewer {
     public partial class Form1 : Form {
         public static readonly String LF = "\r\n";
+        public static readonly String EVENT_VIEWER_CMD =
+            @"%windir%\system32\eventvwr.msc /s";
         private String initialDirectory = "";
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -67,6 +70,53 @@ namespace WindowsPerformanceViewer {
         private void overviewToolStripMenuItem_Click(object sender, EventArgs e) {
             OverviewDialog dlg = new OverviewDialog();
             dlg.ShowDialog();
+        }
+
+        private void eventDescriptionToolStripMenuItem_Click(object sender, EventArgs e) {
+            InformationDialog dlg = new InformationDialog();
+            String info = DiagnosticsUtils.getDiagnosticsEventProvider();
+            dlg.Text = "Provider Information";
+            dlg.TextBox.WordWrap = true;
+            dlg.TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+
+            if (info != null) {
+                dlg.TextBox.Text = info;
+            } else {
+                dlg.TextBox.Text = "Unable to get eve nt provider information";
+            }
+            // Unselect the text just added
+            dlg.TextBox.Select(0, 0);
+
+            dlg.ShowDialog();
+        }
+
+        private void runEventViewerToolStripMenuItem_Click(object sender, EventArgs e) {
+#if false
+            WindowsPrincipal principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            bool hasAdministrativeRight = principal.IsInRole(WindowsBuiltInRole.Administrator);
+            if (!hasAdministrativeRight) {
+                DialogResult res =
+                    MessageBox.Show("This application requires admin privilages."
+                    + LF + "Click Ok to elevate or Cancel to exit.",
+                    "Elevate?",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question);
+                if (res == DialogResult.OK) {
+                    // TODO
+                } else {
+                    // TODO
+                }
+            }
+#endif
+            try {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.Verb = "runas";
+                startInfo.FileName = "eventvwr.msc";
+                startInfo.Arguments = "/s";
+                Process.Start(startInfo);
+            } catch (Exception ex) {
+                Utils.excMsg("Problems starting the Event Viewer", ex);
+            }
         }
     }
 }

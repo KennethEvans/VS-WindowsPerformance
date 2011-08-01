@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics.Eventing.Reader;
 
 namespace WindowsPerformanceReview {
     class Program {
@@ -38,6 +39,10 @@ namespace WindowsPerformanceReview {
             swOut.WriteLine(DiagnosticsUtils.queryLogFileXml(queryString, pathType, eventLog));
 #endif
 #if true
+            // Get the diagnostics event provider
+            swOut.WriteLine(DiagnosticsUtils.getDiagnosticsEventProvider());
+#endif
+#if false
             // Get the boot times
             swOut.WriteLine("Boot Times");
             List<String[]> bootTimes = DiagnosticsUtils.getBootTimes();
@@ -56,7 +61,7 @@ namespace WindowsPerformanceReview {
             }
             swOut.WriteLine();
 #endif
-#if true
+#if false
             // Make a CSV file
             swOut.WriteLine("Making Boot Times CSV file " + BOOT_CSV_FILE);
             if (doBootCsv) {
