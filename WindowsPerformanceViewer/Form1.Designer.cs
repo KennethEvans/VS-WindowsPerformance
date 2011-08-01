@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace WindowsPerformanceViewer {
     partial class Form1 {
@@ -9,46 +6,6 @@ namespace WindowsPerformanceViewer {
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        private static readonly String[] colHeadings = {
-            "(Times are in sec)",
-            "BootTime",
-            "MainPathBootTime",
-            "BootPostBootTime",
-        };
-        private static readonly int nCols = colHeadings.Length;
-        private static readonly String[] rowHeadings = {
-            "Last",
-            "Mean",
-            "Standard Deviation",
-            "Min",
-            "Max",
-        };
-        private static readonly int nRows = rowHeadings.Length;
-        public static readonly double MS2SEC = .001;
-
-        List<String[]> bootTimes;
-
-        public List<String[]> BootTimes {
-            get { return bootTimes; }
-            set { bootTimes = value; }
-        }
-
-        public Form1() {
-            InitializeComponent();
-            // Create the DataSource
-            DataTable table = getResultsTable();
-            if (table == null) {
-                MessageBox.Show("Unable to get data.  You may have to run as administrator.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            dataGridView1.DataSource = getResultsTable();
-            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            //dataGridView1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            //dataGridView1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            //dataGridView1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        }
 
         /// <summary>
         /// Clean up any resources being used.
@@ -235,60 +192,6 @@ namespace WindowsPerformanceViewer {
         }
 
         #endregion
-
-        /// <summary>
-        /// Builds a DataTable of the boot times data.
-        /// </summary>
-        public DataTable getResultsTable() {
-            bootTimes = DiagnosticsUtils.getBootTimes();
-            DiagnosticsUtils.setStatistics(bootTimes);
-            if (bootTimes == null) {
-                // TODO
-                return null;
-            }
-            int count = bootTimes.Count;
-            // Do the last nLast data points
-            int nLast = 5;
-            // The last item before the statistics is count -5
-            int lastPos = count - 4 - nLast;
-            if (lastPos <= 0) {
-                // TODO
-                return null;
-            }
-
-            String[][] data = bootTimes.ToArray();
-            int nItems = data[0].Length;
-
-            // Convert all the times to sec
-            double doubleVal;
-            for (int j = 0; j < count; j++) {
-                for (int i = 1; i < nCols; i++) {
-                    try {
-                        doubleVal = Convert.ToDouble(data[j][i]);
-                    } catch (FormatException) {
-                        doubleVal = Double.NaN;
-                    } catch (OverflowException) {
-                        doubleVal = Double.NaN;
-                    }
-                    doubleVal *= MS2SEC;
-                    data[j][i] = String.Format("{0:0.0}", doubleVal);
-                }
-            }
-
-            // Create the output table.
-            DataTable dt = new DataTable();
-
-            // Add the columns
-            foreach (string heading in colHeadings) {
-                dt.Columns.Add(heading, typeof(String));
-            }
-
-            // Add the rows
-            for (int i = lastPos; i < count; i++) {
-                dt.Rows.Add(data[i][0], data[i][1], data[i][2], data[i][3]);
-            }
-            return dt;
-        }
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private MenuStrip menuStrip1;

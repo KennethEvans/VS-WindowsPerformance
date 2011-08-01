@@ -1,15 +1,117 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using System.Security.Principal;
 
 namespace WindowsPerformanceViewer {
     public partial class Form1 : Form {
         public static readonly String LF = "\r\n";
         public static readonly String EVENT_VIEWER_CMD =
             @"%windir%\system32\eventvwr.msc /s";
+        private static readonly String[] colHeadings = {
+            "(Times are in sec)",
+            "BootTime",
+            "MainPathBootTime",
+            "BootPostBootTime",
+        };
+        private static readonly int nCols = colHeadings.Length;
+        private static readonly String[] rowHeadings = {
+            "Last",
+            "Mean",
+            "Standard Deviation",
+            "Min",
+            "Max",
+        };
+        private static readonly int nRows = rowHeadings.Length;
+        public static readonly double MS2SEC = .001;
+
+        private List<String[]> bootTimes;
+
+        public List<String[]> BootTimes {
+            get { return bootTimes; }
+            set { bootTimes = value; }
+        }
+
         private String initialDirectory = "";
+
+       /// <summary>
+       /// Constructor.
+       /// </summary>
+        public Form1() {
+            InitializeComponent();
+            // Create the DataSource
+            DataTable table = getResultsTable();
+            if (table == null) {
+                MessageBox.Show("Unable to get data.  You may have to run as administrator.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            dataGridView1.DataSource = getResultsTable();
+            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //dataGridView1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dataGridView1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dataGridView1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        /// <summary>
+        /// Builds a DataTable of the boot times data.
+        /// </summary>
+        public DataTable getResultsTable() {
+            bootTimes = DiagnosticsUtils.getBootTimes();
+            DiagnosticsUtils.setStatistics(bootTimes);
+            if (bootTimes == null) {
+                // TODO
+                return null;
+            }
+            int count = bootTimes.Count;
+            // Do the last nLast data points
+            int nLast = 5;
+            // The last item before the statistics is count -5
+            int lastPos = count - 4 - nLast;
+            if (lastPos <= 0) {
+                // TODO
+                return null;
+            }
+
+            String[][] data = bootTimes.ToArray();
+            int nItems = data[0].Length;
+
+            // Convert all the times to sec
+            double doubleVal;
+            for (int j = 0; j < count; j++) {
+                for (int i = 1; i < nCols; i++) {
+                    try {
+                        doubleVal = Convert.ToDouble(data[j][i]);
+                    } catch (FormatException) {
+                        doubleVal = Double.NaN;
+                    } catch (OverflowException) {
+                        doubleVal = Double.NaN;
+                    }
+                    doubleVal *= MS2SEC;
+                    data[j][i] = String.Format("{0:0.0}", doubleVal);
+                }
+            }
+
+            // Create the output table.
+            DataTable dt = new DataTable();
+
+            // Add the columns
+            foreach (string heading in colHeadings) {
+                dt.Columns.Add(heading, typeof(String));
+            }
+
+            // Add the rows
+            for (int i = lastPos; i < count; i++) {
+                dt.Rows.Add(data[i][0], data[i][1], data[i][2], data[i][3]);
+            }
+            return dt;
+        }
+
+        /////////////////////////////////////////////////////////////////////
+        // Event Handlers 
+        /////////////////////////////////////////////////////////////////////
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
