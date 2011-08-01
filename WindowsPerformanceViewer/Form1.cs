@@ -36,9 +36,9 @@ namespace WindowsPerformanceViewer {
 
         private String initialDirectory = "";
 
-       /// <summary>
-       /// Constructor.
-       /// </summary>
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public Form1() {
             InitializeComponent();
             // Create the DataSource
@@ -109,6 +109,36 @@ namespace WindowsPerformanceViewer {
             return dt;
         }
 
+        /// <summary>
+        /// Common method used to display event summaries.
+        /// </summary>
+        /// <param name="startId">Starting event ID.</param>
+        /// <param name="endId">Ending eventId.</param>
+        private void showSummaryDialog(String title, int startId, int endId) {
+            InformationDialog dlg = new InformationDialog();
+            Cursor oldCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            String info = title + LF;
+            info += "Data as of: " + DateTime.Now + LF + LF;
+            info += DiagnosticsUtils.getDiagnosticsLogForEvents(startId, endId);
+            dlg.Text = title;
+            dlg.TextBox.WordWrap = true;
+            dlg.TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            dlg.ClientSize = new System.Drawing.Size(500, 500);
+
+
+            if (info != null) {
+                dlg.TextBox.Text = info;
+            } else {
+                dlg.TextBox.Text = "Unable to get " + title;
+            }
+            // Unselect the text just added
+            dlg.TextBox.Select(0, 0);
+
+            Cursor.Current = oldCursor;
+            dlg.Show();
+        }
+
         /////////////////////////////////////////////////////////////////////
         // Event Handlers 
         /////////////////////////////////////////////////////////////////////
@@ -117,7 +147,7 @@ namespace WindowsPerformanceViewer {
             Application.Exit();
         }
 
-        private void createCSVFileToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void createCSVFileMenuItem_Click(object sender, EventArgs e) {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter =
                "csv files (*.csv)|*.csv|All files (*.*)|*.*";
@@ -155,27 +185,30 @@ namespace WindowsPerformanceViewer {
             }
         }
 
-        private void plotToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void plotMenuItem_Click(object sender, EventArgs e) {
             Cursor oldCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             PlotForm plotForm = new PlotForm();
             plotForm.StartPosition = FormStartPosition.CenterParent;
-            plotForm.Show();
+
             Cursor.Current = oldCursor;
+            plotForm.Show();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void aboutMenuItem_Click(object sender, EventArgs e) {
             AboutBox dlg = new AboutBox();
             dlg.ShowDialog();
         }
 
-        private void overviewToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void overviewMenuItem_Click(object sender, EventArgs e) {
             OverviewDialog dlg = new OverviewDialog();
-            dlg.ShowDialog();
+            dlg.Show();
         }
 
-        private void eventDescriptionToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void eventDescriptionMenuItem_Click(object sender, EventArgs e) {
             InformationDialog dlg = new InformationDialog();
+            Cursor oldCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
             String info = DiagnosticsUtils.getDiagnosticsEventProvider();
             dlg.Text = "Provider Information";
             dlg.TextBox.WordWrap = true;
@@ -184,15 +217,16 @@ namespace WindowsPerformanceViewer {
             if (info != null) {
                 dlg.TextBox.Text = info;
             } else {
-                dlg.TextBox.Text = "Unable to get eve nt provider information";
+                dlg.TextBox.Text = "Unable to get event description information";
             }
             // Unselect the text just added
             dlg.TextBox.Select(0, 0);
 
-            dlg.ShowDialog();
+            Cursor.Current = oldCursor;
+            dlg.Show();
         }
 
-        private void runEventViewerToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void runEventViewerMenuItem_Click(object sender, EventArgs e) {
 #if false
             WindowsPrincipal principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
             bool hasAdministrativeRight = principal.IsInRole(WindowsBuiltInRole.Administrator);
@@ -219,6 +253,26 @@ namespace WindowsPerformanceViewer {
             } catch (Exception ex) {
                 Utils.excMsg("Problems starting the Event Viewer", ex);
             }
+        }
+
+        private void bootEventsMenuItem_Click(object sender, EventArgs e) {
+            showSummaryDialog("Boot Events", 100, 199);
+        }
+
+        private void shutdownEventsMenuItem_Click(object sender, EventArgs e) {
+            showSummaryDialog("Shutdown Events", 200, 299);
+        }
+
+        private void standbyEventsMenuItem_Click(object sender, EventArgs e) {
+            showSummaryDialog("Standby Events", 300, 399);
+        }
+
+        private void monitoringEventsMenuItem_Click(object sender, EventArgs e) {
+            showSummaryDialog("Performance Monitoring Events", 400, 499);
+        }
+
+        private void otherEventsMenuItem_Click(object sender, EventArgs e) {
+            showSummaryDialog("Other Events", 500, 10000);
         }
     }
 }

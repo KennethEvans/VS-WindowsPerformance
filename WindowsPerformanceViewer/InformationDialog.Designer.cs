@@ -31,16 +31,16 @@
             this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox.Location = new System.Drawing.Point(0, 0);
             this.textBox.Multiline = true;
-            this.textBox.Name = "textBox1";
+            this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(466, 442);
+            this.textBox.Size = new System.Drawing.Size(482, 404);
             this.textBox.TabIndex = 0;
             // 
             // InformationDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 442);
+            this.ClientSize = new System.Drawing.Size(482, 404);
             this.Controls.Add(this.textBox);
             this.Name = "InformationDialog";
             this.Text = "Information";

@@ -1,17 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace WindowsPerformanceViewer {
-    public partial class OverviewDialog : Form {
-        /// <summary>
-        /// This is the rich text for the overview dialog.  It is best edited
-        /// by an application that handles rich text, such as Open Office Write
-        /// or Microsoft Word.  It can then be opened in Visual Studio, which
-        /// treats it as text.  The contents can then be pasted between the
-        /// quotes in the definition.
-        /// </summary>
-        private static readonly String overviewText =
-@"{\rtf1\ansi\deff1\adeflang1025
+{\rtf1\ansi\deff1\adeflang1025
 {\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\fswiss\fprq0\fcharset0 Arial;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\fnil\fprq0\fcharset0 Arial;}{\f4\fswiss\fprq0\fcharset0 Arial;}{\f5\fmodern\fprq1\fcharset0 Courier New;}{\f6\fnil\fprq2\fcharset0 SimSun;}{\f7\fnil\fprq2\fcharset0 Microsoft YaHei;}{\f8\fmodern\fprq1\fcharset0 NSimSun;}{\f9\fnil\fprq0\fcharset0 Mangal;}}
 {\colortbl;\red0\green0\blue0;\red128\green128\blue128;}
 {\stylesheet{\s1\cf0{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\rtlch\af1\afs20\lang1081\ltrch\dbch\af6\langfe2052\hich\f1\fs20\lang1033\loch\f1\fs20\lang1033\snext1 Normal;}
@@ -97,15 +84,4 @@ indows | Diagnostics-Performance.}
 \par \pard\plain \ltrpar\s1\cf0{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\ql\rtlch\af1\afs20\lang1081\ab\ltrch\dbch\af6\langfe2052\hich\f1\fs20\lang1033\b\loch\f1\fs20\lang1033\b {\rtlch \ltrch\loch\f1\fs20\lang1033\i0\b About}
 \par \pard\plain \ltrpar\s1\cf0{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\ql\rtlch\af1\afs20\lang1081\ltrch\dbch\af6\langfe2052\hich\f1\fs20\lang1033\loch\f1\fs20\lang1033 
 \par \pard\plain \ltrpar\s1\cf0{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\rtlch\af1\afs20\lang1081\ltrch\dbch\af6\langfe2052\hich\f1\fs20\lang1033\loch\f1\fs20\lang1033 {\rtlch \ltrch\loch\f1\fs20\lang1033\i0\b0 About this application.}
-\par }";
-
-        public OverviewDialog() {
-            InitializeComponent();
-
-            overviewTextBox.Rtf = overviewText;
-            // Comes up with all text selected.  Deselect it.
-            overviewTextBox.Select(0, 0);
-            overviewTextBox.WordWrap = true;
-        }
-    }
-}
+\par }

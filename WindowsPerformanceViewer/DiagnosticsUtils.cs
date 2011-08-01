@@ -136,17 +136,19 @@ class DiagnosticsUtils {
             sb.AppendLine("This provider has the following logs:");
             foreach (EventLogLink eventLink in metaData.LogLinks) {
                 sb.AppendLine(SEPARATOR_LINE);
-                sb.AppendFormat("Display Name: {0}", eventLink.DisplayName);
-                sb.AppendFormat("LogName: {0}", eventLink.LogName);
+                sb.AppendFormat("Display Name: {0}" + LF, eventLink.DisplayName);
+                sb.AppendFormat("LogName: {0}" + LF, eventLink.LogName);
             }
+            sb.AppendLine(SEPARATOR_LINE);
 
             sb.AppendLine();
             sb.AppendLine("This provider publishes the following events:");
             foreach (EventMetadata eventData in metaData.Events) {
                 sb.AppendLine(SEPARATOR_LINE);
-                sb.AppendFormat("Event ID = {0}. Description: {1}",
-                    eventData.Id, eventData.Description);
+                sb.AppendLine("Event ID " + eventData.Id);
+                sb.AppendLine(eventData.Description);
             }
+            sb.AppendLine(SEPARATOR_LINE);
         } catch (Exception ex) {
             sb.Append(excMsgLocal("Error in getEventProviders", ex));
         }
@@ -344,10 +346,6 @@ class DiagnosticsUtils {
     }
 
 
-    // 0: BootStartTime
-    // 1: BootTime
-    // 2: MainPathBootTime
-    // 3: BootPostBootTime
     /// <summary>
     /// Gets a List of int[N_BOOT_VALS] values representing the boot times.
     /// <list type="bullet">
@@ -457,6 +455,60 @@ class DiagnosticsUtils {
             }
         }
         return "OK";
+    }
+
+    public static String getDiagnosticsLogForEvents(int startId, int endId) {
+        String queryString = "*"; // XPATH Query
+        String logName = "Microsoft-Windows-Diagnostics-Performance/Operational";
+        PathType pathType = PathType.LogName;
+
+        StringBuilder sb = new StringBuilder();
+        EventLogQuery eventsQuery = new EventLogQuery(logName, pathType, queryString);
+        sb.AppendLine(logName);
+        sb.AppendLine("ID=" + startId + "-" + endId);
+
+
+        try {
+            EventLogReader logReader = new EventLogReader(eventsQuery);
+            int count = 0;
+            EventLogRecord elr;
+            for (EventRecord er = logReader.ReadEvent();
+                er != null; er = logReader.ReadEvent()) {
+                if (er.Id < startId || er.Id > endId) {
+                    continue;
+                }
+                count++;
+                // Needs to be cast to get to FormatDescription
+                elr = (EventLogRecord)er;
+                sb.AppendLine(SEPARATOR_LINE);
+                // This outputs the description formatted with the event values
+                sb.AppendLine(elr.FormatDescription());
+#if false
+                IEnumerable<String> keywordDisplayNames = er.KeywordsDisplayNames;
+                sb.AppendLine("Keyword Display Names");
+                foreach (String name in keywordDisplayNames) {
+                    sb.AppendLine("  " + name);
+                }
+
+                IList<EventProperty> eventProperties = er.Properties;
+                sb.AppendLine("Event Properties");
+                foreach (EventProperty prop in eventProperties) {
+                    sb.AppendLine("  " + prop.Value);
+                }
+                sb.AppendLine("XML: " + er.ToXml());
+#endif
+            }
+            sb.AppendLine(SEPARATOR_LINE);
+            sb.AppendLine(LF + "Events found : " + count);
+        } catch (EventLogNotFoundException ex) {
+            Console.WriteLine(excMsgLocal("Could not find the " + logName + "log", ex));
+            return null;
+        } catch (Exception ex) {
+            Console.WriteLine(excMsgLocal("Error in getBootTimes", ex));
+            return null;
+        }
+
+        return sb.ToString();
     }
 
 }
