@@ -1,0 +1,302 @@
+WindowsPerformanceReview 7/31/2011 12:50:03 PM
+
+Provider: Microsoft-Windows-Diagnostics-Performance
+
+This provider has the following logs:
+--------------------------------------------------
+Display Name: OperationalLogName: Microsoft-Windows-Diagnostics-Performance/Operational--------------------------------------------------
+Display Name: DiagnosticLogName: Microsoft-Windows-Diagnostics-Performance/Diagnostic--------------------------------------------------
+Display Name: Diagnostic-LoopbackLogName: Microsoft-Windows-Diagnostics-Performance/Diagnostic/Loopback
+This provider publishes the following events:
+--------------------------------------------------
+Event ID = 100. Description: Windows has started up: 
+     Boot Duration		:	%6ms
+     IsDegradation		:	%26
+     Incident Time (UTC)	:	%2--------------------------------------------------
+Event ID = 100. Description: Windows has started up: 
+     Boot Duration		:	%6ms
+     IsDegradation		:	%26
+     Incident Time (UTC)	:	%2--------------------------------------------------
+Event ID = 101. Description: This application took longer than usual to start up, resulting in a performance degradation in the system startup process: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 102. Description: This driver took longer to initialize, resulting in a performance degradation in the system start up process: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 103. Description: This startup service took longer than expected to startup, resulting in a performance degradation in the system start up process: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 104. Description: Core system took longer to initialize, resulting in a performance degradation in the system start up process: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 105. Description: Foreground optimizations (prefetching) took longer to complete, resulting in a performance degradation in the system start up process: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 106. Description: Background optimizations (prefetching) took longer to complete, resulting in a performance degradation in the system start up process: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 107. Description: Application of machine policy caused a slow down in the system start up process: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 108. Description: Application of user policy caused a slow down in the system start up process: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 109. Description: This device took longer to initialize, resulting in a performance degradation in the system start up process: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 110. Description: Session manager initialization caused a slow down in the startup process: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 200. Description: Windows has shutdown: 
+     Shutdown Duration	:	%4ms
+     IsDegradation		:	%16
+     Incident Time (UTC)	:	%2--------------------------------------------------
+Event ID = 201. Description: This application caused a delay in the system shutdown process: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 202. Description: This device caused a delay in the system shutdown process: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 203. Description: This service caused a delay in the system shutdown process: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 300. Description: Windows has resumed from standby: 
+     Standby Duration		:	%7ms
+     Standby Incident Time (UTC)	:	%5
+     Resume  Duration		:	%39ms
+     Resume  Incident Time (UTC)	:	%37
+     IsDegradation			:	%51--------------------------------------------------
+Event ID = 301. Description: This application caused a delay during standby: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 302. Description: This driver caused a delay during standby while servicing a device:
+     Driver File Name		:	%3
+     Driver Friendly Name		:	%5
+     Driver Version			:	%7
+     Driver Total Time		:	%8ms
+     Driver Degradation Time	:	%9ms
+     Incident Time (UTC)		:	%1
+     Device Name			:	%17
+     Device Friendly Name		:	%19
+     Device Total Time		:	%20ms
+     Device Degradation Time	:	%21ms--------------------------------------------------
+Event ID = 303. Description: This service caused a delay during hybrid-sleep: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Total Time		:	%8ms
+     Degradation Time	:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 304. Description: Creation of the hiber-file was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 305. Description: Persisting disk caches was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 306. Description: Preparing the video subsystem for sleep was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 307. Description: Preparing Winlogon for sleep was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 308. Description: Preparing system memory for sleep was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 309. Description: Preparing core system for sleep was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 310. Description: Preparing system worker threads for sleep was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 350. Description: Bios initialization time was greater than 250ms (logo requirement) during system resume: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 351. Description: This driver responded slower than expected to the resume request while servicing this device: 
+     Driver File Name		:	%3
+     Driver Friendly Name		:	%5
+     Driver Version			:	%7
+     Driver Total Time		:	%8ms
+     Driver Degradation Time	:	%9ms
+     Incident Time (UTC)		:	%1
+     Device Name			:	%17
+     Device Friendly Name		:	%19
+     Device Total Time		:	%20ms
+     Device Degradation Time	:	%21ms--------------------------------------------------
+Event ID = 352. Description: Reading the hiber-file was slower than expected: 
+     Name		:	%3
+     Total Time		:	%4ms
+     Degradation Time	:	%5ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 400. Description: Information about the system performance monitoring event: 
+     Scenario		:	%3
+     Analysis result		:	%6
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 401. Description: This process is using up processor time and is impacting the performance of Windows: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Thread time		:	%8ms
+     Blocked Time		:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 402. Description: This process is doing excessive disk activities and is impacting the performance of Windows: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Thread time		:	%8ms
+     Blocked Time		:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 403. Description: This driver is using up too many resources and is impacting the performance of Windows: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Thread time		:	%8ms
+     Blocked Time		:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 404. Description: This driver is waiting longer than expected on a device: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Thread time		:	%8ms
+     Blocked Time		:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 405. Description: This file is fragmented and is impacting the performance of Windows: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Thread time		:	%8ms
+     Blocked Time		:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 406. Description: Disk IO to this file is taking longer than expected: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Thread time		:	%8ms
+     Blocked Time		:	%9ms
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 407. Description: This process is using up too much system memory: 
+     File Name		:	%3
+     Friendly Name		:	%5
+     Version		:	%7
+     Workingset size	:	%8Kb
+     Percent memory	:	%11
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 408. Description: Many processes are using too much system memory: 
+     Workingset size	:	%2Kb
+     Percent memory	:	%3
+     Incident Time (UTC)	:	%1--------------------------------------------------
+Event ID = 500. Description: The Desktop Window Manager is experiencing heavy resource contention. 
+     Scenario	:	%5--------------------------------------------------
+Event ID = 501. Description: The Desktop Window Manager is experiencing heavy resource contention.
+     Reason	:	%1
+     Diagnosis	:	%2--------------------------------------------------
+Event ID = 1001. Description: Status--------------------------------------------------
+Event ID = 1002. Description: Status--------------------------------------------------
+Event ID = 1003. Description: Status--------------------------------------------------
+Event ID = 1005. Description: Status--------------------------------------------------
+Event ID = 1006. Description: Status--------------------------------------------------
+Event ID = 1007. Description: Status--------------------------------------------------
+Event ID = 1010. Description: Status--------------------------------------------------
+Event ID = 1011. Description: Status--------------------------------------------------
+Event ID = 1012. Description: Status--------------------------------------------------
+Event ID = 1013. Description: Status--------------------------------------------------
+Event ID = 1014. Description: Status--------------------------------------------------
+Event ID = 1015. Description: Status--------------------------------------------------
+Event ID = 1020. Description: Status--------------------------------------------------
+Event ID = 1022. Description: Status--------------------------------------------------
+Event ID = 2001. Description: Status--------------------------------------------------
+Event ID = 2002. Description: Status--------------------------------------------------
+Event ID = 2003. Description: Status--------------------------------------------------
+Event ID = 2004. Description: Status--------------------------------------------------
+Event ID = 2005. Description: Status--------------------------------------------------
+Event ID = 2006. Description: Status--------------------------------------------------
+Event ID = 2007. Description: Status--------------------------------------------------
+Event ID = 2008. Description: Status--------------------------------------------------
+Event ID = 2009. Description: Status--------------------------------------------------
+Event ID = 2010. Description: Status--------------------------------------------------
+Event ID = 2011. Description: Status--------------------------------------------------
+Event ID = 2012. Description: Status--------------------------------------------------
+Event ID = 2013. Description: Status--------------------------------------------------
+Event ID = 2014. Description: Status--------------------------------------------------
+Event ID = 2015. Description: Status--------------------------------------------------
+Event ID = 2016. Description: Status--------------------------------------------------
+Event ID = 7001. Description: Status--------------------------------------------------
+Event ID = 7101. Description: Status--------------------------------------------------
+Event ID = 7102. Description: Status--------------------------------------------------
+Event ID = 7103. Description: Status--------------------------------------------------
+Event ID = 7104. Description: Status--------------------------------------------------
+Event ID = 7105. Description: Status--------------------------------------------------
+Event ID = 7106. Description: Status--------------------------------------------------
+Event ID = 8001. Description: Status--------------------------------------------------
+Event ID = 8002. Description: Status--------------------------------------------------
+Event ID = 8003. Description: Status--------------------------------------------------
+Event ID = 8004. Description: Status--------------------------------------------------
+Event ID = 8005. Description: Status--------------------------------------------------
+Event ID = 8006. Description: Status--------------------------------------------------
+Event ID = 8007. Description: Status--------------------------------------------------
+Event ID = 8008. Description: Status--------------------------------------------------
+Event ID = 8009. Description: Status--------------------------------------------------
+Event ID = 8010. Description: Status--------------------------------------------------
+Event ID = 8011. Description: Status--------------------------------------------------
+Event ID = 8012. Description: Status--------------------------------------------------
+Event ID = 8013. Description: Status
+Output file is C:\Users\evans\Documents\Visual Studio Projects\WindowsPerformance\WindowsPerformanceReview.txt
