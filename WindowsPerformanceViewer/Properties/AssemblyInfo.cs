@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("kenevans.net")]
 [assembly: AssemblyProduct("Windows Performance Viewer")]
-[assembly: AssemblyCopyright("Copyright © Kenneth Evans 2011")]
+[assembly: AssemblyCopyright("Copyright © Kenneth Evans 2011-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

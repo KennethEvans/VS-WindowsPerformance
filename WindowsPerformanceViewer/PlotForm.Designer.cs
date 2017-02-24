@@ -31,6 +31,7 @@ namespace WindowsPerformanceViewer {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlotForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -39,6 +40,7 @@ namespace WindowsPerformanceViewer {
             this.setYButton = new System.Windows.Forms.Button();
             this.setXButton = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -50,6 +52,7 @@ namespace WindowsPerformanceViewer {
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -60,19 +63,21 @@ namespace WindowsPerformanceViewer {
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.chart1);
-            this.splitContainer1.Size = new System.Drawing.Size(989, 551);
-            this.splitContainer1.SplitterDistance = 225;
+            this.splitContainer1.Size = new System.Drawing.Size(1978, 1068);
+            this.splitContainer1.SplitterDistance = 450;
+            this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 0;
             // 
             // listBox1
             // 
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
+            this.listBox1.ItemHeight = 31;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(225, 468);
+            this.listBox1.Size = new System.Drawing.Size(450, 909);
             this.listBox1.TabIndex = 0;
             // 
             // panel1
@@ -82,16 +87,18 @@ namespace WindowsPerformanceViewer {
             this.panel1.Controls.Add(this.setYButton);
             this.panel1.Controls.Add(this.setXButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 469);
+            this.panel1.Location = new System.Drawing.Point(0, 909);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(225, 82);
+            this.panel1.Size = new System.Drawing.Size(450, 159);
             this.panel1.TabIndex = 1;
             // 
             // printButton
             // 
-            this.printButton.Location = new System.Drawing.Point(107, 40);
+            this.printButton.Location = new System.Drawing.Point(214, 78);
+            this.printButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.printButton.Name = "printButton";
-            this.printButton.Size = new System.Drawing.Size(75, 23);
+            this.printButton.Size = new System.Drawing.Size(150, 45);
             this.printButton.TabIndex = 4;
             this.printButton.Text = "Print";
             this.printButton.UseVisualStyleBackColor = true;
@@ -99,9 +106,10 @@ namespace WindowsPerformanceViewer {
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(12, 40);
+            this.resetButton.Location = new System.Drawing.Point(24, 78);
+            this.resetButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(75, 23);
+            this.resetButton.Size = new System.Drawing.Size(150, 45);
             this.resetButton.TabIndex = 3;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
@@ -109,9 +117,10 @@ namespace WindowsPerformanceViewer {
             // 
             // setYButton
             // 
-            this.setYButton.Location = new System.Drawing.Point(12, 11);
+            this.setYButton.Location = new System.Drawing.Point(24, 21);
+            this.setYButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.setYButton.Name = "setYButton";
-            this.setYButton.Size = new System.Drawing.Size(75, 23);
+            this.setYButton.Size = new System.Drawing.Size(150, 45);
             this.setYButton.TabIndex = 2;
             this.setYButton.Text = "Set Y";
             this.setYButton.UseVisualStyleBackColor = true;
@@ -119,9 +128,10 @@ namespace WindowsPerformanceViewer {
             // 
             // setXButton
             // 
-            this.setXButton.Location = new System.Drawing.Point(107, 11);
+            this.setXButton.Location = new System.Drawing.Point(214, 21);
+            this.setXButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.setXButton.Name = "setXButton";
-            this.setXButton.Size = new System.Drawing.Size(75, 23);
+            this.setXButton.Size = new System.Drawing.Size(150, 45);
             this.setXButton.TabIndex = 0;
             this.setXButton.Text = "Set X";
             this.setXButton.UseVisualStyleBackColor = true;
@@ -135,25 +145,29 @@ namespace WindowsPerformanceViewer {
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
+            this.chart1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(760, 551);
+            this.chart1.Size = new System.Drawing.Size(1520, 1068);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // PlotForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 551);
+            this.ClientSize = new System.Drawing.Size(1978, 1068);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "PlotForm";
             this.Text = "Boot Parameters";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
