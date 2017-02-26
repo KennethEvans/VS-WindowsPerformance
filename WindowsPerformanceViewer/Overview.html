@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Windows Performance Viewer</title>
+</head>
+
+<body>
+<h1 align="center"><strong>Windows Performance Viewer Overview</strong></h1>
+<p align="left">Windows Performance Viewer accesses the Windows event logs and presents details of the performance in convenient ways. The logs used in this application are those provided by Microsoft-Windows-Diagnostics-Performance. You will probably have to run it as administrator to get access to the diagnostic logs.</p>
+<h3><strong>Boot Performance</strong></h3>
+<p align="left">These data are found in the Applications and Services Logs | Microsoft | Windows | Diagnostics-Performance | Operational for Event ID = 100.</p>
+<p align="left">The&nbsp;<em>BootTime</em>&nbsp;is the sum of the&nbsp;<em>MainPathBootTime,</em>&nbsp;and the&nbsp;<em>BootPostBootTime</em>&nbsp;and is the best figure of merit for the time it takes to boot. The&nbsp;<em>MainPathBootTime</em>&nbsp;is roughly the time it takes for the desktop to become functional. There is not enough space in this overview to describe all the available parameters. There is more information on the web.</p>
+<h3 align="left"><strong>File Menu</strong></h3>
+<p align="left"><strong>Create Boot CSV File</strong></p>
+<p align="left">Allows you to make a CSV file of all the data and to open it in a spreadsheet. The latter should work if you have a file association for .csv.</p>
+<p align="left"><strong>Boot Plots...</strong></p>
+<p align="left">Allows you to plot any of the parameters found as a function of the&nbsp;<em>BootStartTime</em>, or in fact, any of the other parameters. The default plot is&nbsp;<em>BootTime</em>,&nbsp;<em>MainPathBootTime</em>, and&nbsp;<em>BootPostBootTime</em>as a function of&nbsp;<em>BootStartTime</em>. The plot view has a list box to the left with all the parameters at the top and buttons at the bottom. You can multi-select items to plot on the y axis and single-select an item to appear on the x axis. Not all parameters on the x axis give sensible results. You can however use parameters such as&nbsp;<em>Index</em>,&nbsp;<em>BootStartTime</em>,&nbsp;<em>BootEndTime</em>, and&nbsp;<em>UserBootInstance</em>meaningfully. You can also reset the plot to the default and print it.</p>
+<p align="left"><strong>Provider Information...</strong></p>
+<p align="left">Provides information about the Microsoft-Windows-Diagnostics-Performance provider. This includes the logs and events provided.</p>
+<p align="left"><strong>Boot Events...</strong></p>
+<p align="left">A listing of the boot events in the logs. These are events with IDs in the 100's.</p>
+<p align="left"><strong>Shutdown Events...</strong></p>
+<p align="left">A listing of the shutdown events in the logs. These are events with IDs in the 200's.</p>
+<p align="left"><strong>Standby Events...</strong></p>
+<p align="left">A listing of the standby events in the logs. These are events with IDs in the 300's.</p>
+<p align="left"><strong>Monitoring Events...</strong></p>
+<p align="left">A listing of monitoring events in the logs. These are events with IDs in the 400's.</p>
+<p align="left"><strong>Other Events...</strong></p>
+<p align="left">A listing of other events in the logs. These are events with IDs starting with 500 or greater.</p>
+<p align="left"><strong>Run Event Viewer...</strong></p>
+<p align="left">Starts the Windows Event Viewer. This viewer has information about all Windows events, and has more information about performance, in particular, than this application. The performance events are found under Applications and Services Logs | Microsoft | Windows | Diagnostics-Performance.</p>
+<p align="left"><strong>Exit</strong></p>
+<p align="left">Exits the application.</p>
+<h3 align="left"><strong>Help Menu</strong></h3>
+<p align="left"><strong>Overview</strong></p>
+<p align="left">This overview.</p>
+<p align="left"><strong>About</strong></p>
+<p align="left">About this application.</p>
+<p>&nbsp;</p>
+</body>
+</html>
