@@ -80,7 +80,7 @@ namespace WindowsPerformanceViewer {
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(0, 70);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -97,7 +97,7 @@ namespace WindowsPerformanceViewer {
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(1274, 56);
+            this.menuStrip1.Size = new System.Drawing.Size(1274, 53);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -119,7 +119,7 @@ namespace WindowsPerformanceViewer {
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(75, 48);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(75, 45);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // createCSVFileToolStripMenuItem
@@ -197,7 +197,7 @@ namespace WindowsPerformanceViewer {
             // 
             this.runEventViewerToolStripMenuItem.Name = "runEventViewerToolStripMenuItem";
             this.runEventViewerToolStripMenuItem.Size = new System.Drawing.Size(427, 46);
-            this.runEventViewerToolStripMenuItem.Text = "Run Event Viewer";
+            this.runEventViewerToolStripMenuItem.Text = "Run Event Viewer...";
             this.runEventViewerToolStripMenuItem.Click += new System.EventHandler(this.runEventViewerMenuItem_Click);
             // 
             // toolStripMenuItem1
@@ -218,20 +218,20 @@ namespace WindowsPerformanceViewer {
             this.overviewToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(92, 48);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(92, 45);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // overviewToolStripMenuItem
             // 
             this.overviewToolStripMenuItem.Name = "overviewToolStripMenuItem";
-            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(327, 46);
+            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(276, 46);
             this.overviewToolStripMenuItem.Text = "Overview...";
             this.overviewToolStripMenuItem.Click += new System.EventHandler(this.overviewMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(327, 46);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(276, 46);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
             // 
@@ -245,7 +245,7 @@ namespace WindowsPerformanceViewer {
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Windows Performance";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
