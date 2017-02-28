@@ -6,9 +6,11 @@ using System.Diagnostics.Eventing.Reader;
 namespace WindowsPerformanceReview {
     class Program {
         private static readonly String OUTPUT_FILE = "WindowsPerformanceReview.txt";
+#if false
         private static readonly String BOOT_CSV_FILE = "WindowsPerformanceReview.BootTime.csv";
         private static Boolean doBootCsv = true;
         private static Boolean bootCsvFileWritten = false;
+#endif
 
         /////////////////////////////////////////////////////////////////////
         // Main
@@ -82,9 +84,11 @@ namespace WindowsPerformanceReview {
             // Clean up
             String cwd = Directory.GetCurrentDirectory();
             swOut.WriteLine("Output file is " + cwd + Path.DirectorySeparatorChar + OUTPUT_FILE);
+#if false
             if (bootCsvFileWritten) {
                 swOut.WriteLine("Boot CSV file is " + cwd + Path.DirectorySeparatorChar + BOOT_CSV_FILE);
             }
+#endif
             // Close the output stream
             if (swOut != null) {
                 swOut.Close();
