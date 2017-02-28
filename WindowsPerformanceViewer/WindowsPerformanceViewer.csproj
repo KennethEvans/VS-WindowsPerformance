@@ -79,12 +79,6 @@
     <Compile Include="InformationDialog.Designer.cs">
       <DependentUpon>InformationDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverviewDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OverviewDialog.Designer.cs">
-      <DependentUpon>OverviewDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="PlotForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,10 +99,6 @@
       <DependentUpon>InformationDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverviewDialog.resx">
-      <DependentUpon>OverviewDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="PlotForm.resx">
       <DependentUpon>PlotForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -127,7 +117,6 @@
       <DependentUpon>ScrolledHTMLDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Overview.rtf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
