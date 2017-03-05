@@ -127,7 +127,7 @@ namespace WindowsPerformanceViewer {
             dlg.TextBox.WordWrap = true;
             dlg.TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             // Adjust the size for the screen resolution
-            dlg.ClientSize = Utils.getAdjustedSize(this, new Size(500, 500));
+            dlg.ClientSize = Utils.getDpiAdjustedSize(this, new Size(500, 500));
 
             if (info != null) {
                 dlg.TextBox.Text = info;
@@ -205,7 +205,7 @@ namespace WindowsPerformanceViewer {
         private void overviewMenuItem_Click(object sender, EventArgs e) {
             ScrolledHTMLDialog dlg =
                  new ScrolledHTMLDialog(
-                     Utils.getAdjustedSize(this, new Size(800, 600)));
+                     Utils.getDpiAdjustedSize(this, new Size(800, 600)));
             dlg.Show();
         }
 

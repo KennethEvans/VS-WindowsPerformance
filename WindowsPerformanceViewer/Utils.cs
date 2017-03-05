@@ -43,7 +43,7 @@ namespace WindowsPerformanceViewer {
         /// <param name="form"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static Size getAdjustedSize(Form form, Size size) {
+        public static Size getDpiAdjustedSize(Form form, Size size) {
             Graphics g = form.CreateGraphics();
             float dpiX = g.DpiX;
             float dpiY = g.DpiY;
