@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -29,7 +30,8 @@ namespace WindowsPerformanceViewer {
 
         private List<String[]> bootTimes;
 
-        public List<String[]> BootTimes {
+        public List<String[]> BootTimes
+        {
             get { return bootTimes; }
             set { bootTimes = value; }
         }
@@ -124,8 +126,8 @@ namespace WindowsPerformanceViewer {
             dlg.Text = title;
             dlg.TextBox.WordWrap = true;
             dlg.TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            dlg.ClientSize = new System.Drawing.Size(500, 500);
-
+            // Adjust the size for the screen resolution
+            dlg.ClientSize = Utils.getAdjustedSize(this, new Size(500, 500));
 
             if (info != null) {
                 dlg.TextBox.Text = info;

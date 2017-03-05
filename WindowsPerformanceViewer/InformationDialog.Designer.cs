@@ -31,7 +31,7 @@
             // 
             this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox.Location = new System.Drawing.Point(0, 0);
-            this.textBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox.Margin = new System.Windows.Forms.Padding(6);
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
@@ -45,7 +45,7 @@
             this.ClientSize = new System.Drawing.Size(964, 783);
             this.Controls.Add(this.textBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "InformationDialog";
             this.Text = "Information";
             this.ResumeLayout(false);
