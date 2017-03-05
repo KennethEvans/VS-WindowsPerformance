@@ -203,7 +203,9 @@ namespace WindowsPerformanceViewer {
         }
 
         private void overviewMenuItem_Click(object sender, EventArgs e) {
-            ScrolledHTMLDialog dlg = new ScrolledHTMLDialog();
+            ScrolledHTMLDialog dlg =
+                 new ScrolledHTMLDialog(
+                     Utils.getAdjustedSize(this, new Size(800, 600)));
             dlg.Show();
         }
 
