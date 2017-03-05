@@ -11,8 +11,8 @@ Main logs are in C:\Windows\System32\config.
 
 Applications and Services logs are in C:\Windows\System32\winevt\Logs.
 
-You need administrator privileges to acces the Applications and Services logs, but
-not the manin logs.  This program needs to be run as administrator to do that.
+You need administrator privileges to access the Applications and Services logs, but
+not the main logs.  This program needs to be run as administrator to do that.
 
 This program makes CSV files with the data.  Open them in a spreadsheet (e.g. Open Office),
 select the data, then insert a chart.
