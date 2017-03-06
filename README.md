@@ -1,6 +1,8 @@
 # VS-WindowsPerformance
 
-Windows Performance Viewer is a C# application that accesses the Windows event logs and presents details of the performance in convenient ways. The logs used in this application are those provided by Microsoft-Windows-Diagnostics-Performance. You will probably have to run it as administrator to get access to the diagnostic logs. The program does not change anything, just reads the logs.
+Windows Performance Viewer is a C# application that accesses the Windows event logs and presents details of the performance in convenient ways. It was originally used to see if boot time was increasing over time.
+
+The logs used in this application are those provided by Microsoft-Windows-Diagnostics-Performance. You will probably have to run it as administrator to get access to the diagnostic logs. The program does not change anything, just reads the logs.
 
 See https://rawgit.com/KennethEvans/VS-WindowsPerformance/master/WindowsPerformanceViewer/Help/Overview.html
 
