@@ -8,6 +8,15 @@ See https://kennethevans.github.io/index.html#WindowsPerformanceViewer
 
 There is also a C# console project, Windows Performance Review, in the Solution.
 
+**Installation**
+
+If you are installing from a download, just unzip the files into a directory somewhere convenient. Then run it from there. If you are installing from a build, copy these files and directories from the bin/Release directory to a convenient directory.
+
+* WindowsPerformanceViewer.exe
+* Help
+
+To uninstall, just delete these files. 
+
 **More Information**
 
 More information and FAQ are at https://kennethevans.github.io as well as more projects from the same author.
